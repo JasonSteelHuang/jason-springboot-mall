@@ -33,14 +33,20 @@ public class ProductController {
     }
 
     @PutMapping("/products/{productId}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Integer productId,@RequestBody @Valid ProductRequest productRequest){
+    public ResponseEntity<Product> updateProduct(@PathVariable Integer productId, @RequestBody @Valid ProductRequest productRequest) {
         Product product = productService.getProductById(productId);
-        if(product != null){
-            productService.updateProduct(productId,productRequest);
+        if (product != null) {
+            productService.updateProduct(productId, productRequest);
             Product updateProduct = productService.getProductById(productId);
             return ResponseEntity.status(200).body(updateProduct);
-        }else{
+        } else {
             return ResponseEntity.status(404).build();
         }
+    }
+
+    @DeleteMapping("/products/{productId}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Integer productId) {
+        productService.deleteProduct(productId);
+        return ResponseEntity.status(204).build();
     }
 }
