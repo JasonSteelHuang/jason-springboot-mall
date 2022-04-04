@@ -1,5 +1,6 @@
 package com.jason.springbootmall.service.impl;
 
+import com.jason.springbootmall.constant.ProductCategory;
 import com.jason.springbootmall.dao.ProductDao;
 import com.jason.springbootmall.dto.ProductRequest;
 import com.jason.springbootmall.model.Product;
@@ -15,8 +16,8 @@ import java.util.List;
     private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts() {
-        return productDao.getProducts();
+    public List<Product> getProducts(ProductCategory category,String search,Integer page) {
+        return productDao.getProducts(category, search, page);
     }
     @Override
     public Product getProductById(Integer productId) {
