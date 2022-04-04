@@ -23,11 +23,15 @@ public class ProductController {
     public ResponseEntity<List<Product>> getProducts(
             @RequestParam(required = false) ProductCategory category,
             @RequestParam(required = false) String search,
-            @RequestParam(required = false) Integer page
+            @RequestParam(defaultValue = "created_date") String orderBy,
+            @RequestParam(defaultValue = "desc") String sort,
+            @RequestParam(defaultValue = "1") Integer page
     ){
         ProductQueryParams productQueryParams = new ProductQueryParams();
         productQueryParams.setCategory(category);
         productQueryParams.setSearch(search);
+        productQueryParams.setOrderBy(orderBy);
+        productQueryParams.setSort(sort);
         productQueryParams.setPage(page);
 
         List<Product> productList = productService.getProducts(productQueryParams);
