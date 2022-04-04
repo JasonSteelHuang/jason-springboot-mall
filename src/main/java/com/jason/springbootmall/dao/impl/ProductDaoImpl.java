@@ -1,7 +1,7 @@
 package com.jason.springbootmall.dao.impl;
 
-import com.jason.springbootmall.constant.ProductCategory;
 import com.jason.springbootmall.dao.ProductDao;
+import com.jason.springbootmall.dao.ProductQueryParams;
 import com.jason.springbootmall.dto.ProductRequest;
 import com.jason.springbootmall.model.Product;
 import com.jason.springbootmall.rowmapper.ProductRowMapper;
@@ -23,18 +23,18 @@ public class ProductDaoImpl implements ProductDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public List<Product> getProducts(ProductCategory category,String search,Integer page) {
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
         String sql = "SELECT product_id,product_name, category, image_url, price, stock, description, created_date, last_modified_date FROM product WHERE 1=1";
         Map<String,Object> map = new HashMap<>();
-        if(category != null){
+        if(productQueryParams.getCategory() != null){
             sql += " AND category = :category";
-            map.put("category",category.name());
+            map.put("category",productQueryParams.getCategory().name());
         }
-        if(search != null){
+        if(productQueryParams.getSearch() != null){
             sql += " AND product_name LIKE :search";
-            map.put("search","%"+search+"%");
+            map.put("search","%"+productQueryParams.getSearch()+"%");
         }
-        if(page != null){
+        if(productQueryParams.getPage() != null){
 //            sql += " AND category = :category";
 //            map.put("category",category.name());
         }
