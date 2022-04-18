@@ -5,9 +5,26 @@ import com.jason.springbootmall.constant.ProductCategory;
 public class ProductQueryParams {
     private ProductCategory category;
     private String search;
-    private Integer page;
     private String orderBy;
     private String sort;
+    private Integer limit;
+    private Integer offset;
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
+
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
 
     public String getSort() {
         return sort;
@@ -41,11 +58,4 @@ public class ProductQueryParams {
         this.search = search;
     }
 
-    public Integer getPage() {
-        return page;
-    }
-
-    public void setPage(Integer page) {
-        this.page = page;
-    }
 }
